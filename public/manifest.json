@@ -1,0 +1,119 @@
+{
+  "manifest_version": 1,
+  "type": "WebApp",
+  "meta": {
+    "name": "Sample App",
+    "author": "Overwolf",
+    "version": "3.0.3",
+    "minimum-overwolf-version": "0.160.0",
+    "description": "An example app for developers new to Overwolf",
+    "dock_button_title": "Sample - TS",
+    "icon": "icons/IconMouseOver.png",
+    "icon_gray": "icons/IconMouseNormal.png",
+    "launcher_icon": "icons/desktop-icon.ico",
+    "window_icon": "icons/IconMouseOver.png"
+  },
+  "permissions": [
+    "Hotkeys",
+    "GameInfo"
+  ],
+  "data": {
+    "start_window": "background",
+    "hotkeys": {
+      "sample_app_ts_showhide": {
+        "title": "Show/Hide In-Game Window",
+        "action-type": "toggle",
+        "default": "Ctrl+F"
+      }
+    },
+    "protocol_override_domains": {
+      "googlesyndication": "http"
+    },
+    "externally_connectable": {
+      "matches": [
+        "http://*.overwolf.com",
+        "https://*.overwolf.com",
+        "https://*.google-analytics.com",
+        "http://*.google-analytics.com",
+        "https://www.googleapis.com"
+      ]
+    },
+    "force_browser": "user",
+    "windows": {
+      "background": {
+        "file": "background.html",
+        "background_optimization": false,
+        "is_background_page": true
+      },
+      "desktop": {
+        "file": "desktop.html",
+        "desktop_only": true,
+        "native_window": true,
+        "resizable": true,
+        "transparent": true,
+        "focus_game_takeover":"ReleaseOnHidden",
+        "focus_game_takeover_release_hotkey":"sample_app_ts_showhide",
+        "override_on_update": true,
+        "size": {
+          "width": 1212,
+          "height": 699
+        },
+        "min_size": {
+          "width": 1212,
+          "height": 699
+        }
+      },
+      "in_game": {
+        "file": "in_game.html",
+        "in_game_only": true,
+        "native_window": true,
+        "use_os_windowing":true,
+        "show_in_taskbar":true,
+        "start_position":{"top":100,"left":300},
+        "block_top_window_navigation":true,
+        "popup_blocker":true,
+        "mute":true,
+        "enable_top_isolation":true,
+        "allow_local_file_access":true,
+        "focus_game_takeover":"ReleaseOnHidden",
+        "focus_game_takeover_release_hotkey":"sample_app_ts_showhide",
+        "resizable": true,
+        "transparent": true,
+        "override_on_update": true,
+        "size": {
+          "width": 1212,
+          "height": 699
+        },
+        "min_size": {
+          "width": 1212,
+          "height": 699
+        }
+      }
+    },
+    "game_targeting": {
+      "type": "dedicated",
+      "game_ids": [
+        227001
+      ]
+    },
+    "game_events": [
+      227001
+    ],
+    "launch_events": [
+      {
+        "event": "GameLaunch",
+        "event_data": {
+          "game_ids": [
+            227001
+          ]
+        },
+        "start_minimized": false
+      }
+    ],
+    "developer": {
+      "enable_auto_refresh": true,
+      "reload_delay": 1000,
+      "filter": "*.*"
+    }
+  }
+}

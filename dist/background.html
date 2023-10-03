@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<script defer src="js/background.js"></script>
+<script type="text/javascript">
+  document.addEventListener("click", function(event) {
+  //  alert("clientX: " + event.clientX + " - clientY: " + event.clientY);
+  //});
+    var settings = {"crop": {x:299,y:194, width:82, height:82}, "rescale" :{width:42, height:42}};
+    overwolf.media.takeScreenshot(function(info) {
+      if (typeof info.url === 'undefined') {
+        console.error(info);
+        return;
+      }
+
+      document.getElementById("eventsLog").innerHTML = "<img src='"+info.url+"' />";  
+      
+    });
+    console.log(overwolf.games.launchers.getRunningLaunchersInfo(function(errors){}));
+  });
+  document.addEventListener('keydown', function(event) {
+    // Check for Ctrl+Shift+F
+    if (event.ctrlKey && event.shiftKey && event.key === 'F') {
+        // Your action here
+        alert('Hotkey Ctrl+Shift+F was pressed!');
+    }
+  });
+</script>
+</head>
+<body>
+  <div id="eventsLog"></div>
+</body>
+</html>
