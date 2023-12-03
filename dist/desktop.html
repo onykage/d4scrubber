@@ -35,7 +35,6 @@
     </div>
     <div class="desktopBottom">
       <!-- Launch a game! -->
-      <button type="button" onclick="loadDoc()">Change Content</button>
       <div id="left">
         <h1>
           Launch a game and the In-Game window will pop-up automatically!
@@ -81,33 +80,7 @@
     ga('set', 'checkProtocolTask', function () { });
     ga('require', 'displayfeatures');
     ga('send', 'pageview', '/desktop.html');
-
-    async function apiTest() {
-      console.log("Testing api");
-      let url = "http://www.thedouglasgroup.net/files/message.txt";
-      let response = await fetch(url);
-      console.log("response");
-    }
-
-    document.addEventListener('keydown', function(event) {
-        // Check for Ctrl+Shift+F
-        if (event.ctrlKey && event.shiftKey && event.key === 'F') {
-            // Your action here
-            alert('Hotkey Ctrl+Shift+F was pressed!');
-        }
-    });
   </script>
-  <script>
-  function loadDoc() {
-    const xhttp = new XMLHttpRequest();
-    xhttp.onload = function() {
-      document.getElementById("middle").innerHTML =
-      this.responseText;
-    }
-    xhttp.open("GET", "http://www.thedouglasgroup.net/files/message.txt");
-    xhttp.send();
-  }
-</script>
 </body>
 
 </html>

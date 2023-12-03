@@ -2,12 +2,12 @@
   "manifest_version": 1,
   "type": "WebApp",
   "meta": {
-    "name": "Sample App",
-    "author": "Overwolf",
-    "version": "3.0.3",
+    "name": "D4SCrubS",
+    "author": "onykage",
+    "version": "0.1.5",
     "minimum-overwolf-version": "0.160.0",
-    "description": "An example app for developers new to Overwolf",
-    "dock_button_title": "Sample - TS",
+    "description": "A communication overlay for The Crimson Market",
+    "dock_button_title": "D4SCrubS",
     "icon": "icons/IconMouseOver.png",
     "icon_gray": "icons/IconMouseNormal.png",
     "launcher_icon": "icons/desktop-icon.ico",
@@ -24,13 +24,33 @@
         "title": "Show/Hide In-Game Window",
         "action-type": "toggle",
         "default": "Ctrl+F"
+      },
+      "showhide_menu": {
+        "title": "Show/Hide Crimson Menu",
+        "action-type": "toggle",
+        "default": "Ctrl+G"
+      },
+      "alert_the_XY": {
+        "title": "ALERT its the CORDS",
+        "action-type": "toggle",
+        "default": "Ctrl+K"
+      },
+      "show_YourAppName": { 
+          "title": "Show Player",
+          "action-type": "custom",
+          "default": "Shift+F9",
+          "passthrough": true,
+          "hold": true
       }
+
     },
     "protocol_override_domains": {
       "googlesyndication": "http"
     },
     "externally_connectable": {
       "matches": [
+        "http://html2canvas.hertzen.com",
+        "http://tf.raum.au",
         "http://*.overwolf.com",
         "https://*.overwolf.com",
         "https://*.google-analytics.com",
@@ -51,9 +71,15 @@
         "native_window": true,
         "resizable": true,
         "transparent": true,
-        "focus_game_takeover":"ReleaseOnHidden",
-        "focus_game_takeover_release_hotkey":"sample_app_ts_showhide",
+
+        "use_os_windowing":false,
         "override_on_update": true,
+        "block_top_window_navigation":true,
+        "popup_blocker":true,
+        "mute":true,
+        "enable_top_isolation":true,
+        "allow_local_file_access":true,
+
         "size": {
           "width": 1212,
           "height": 699
@@ -67,44 +93,64 @@
         "file": "in_game.html",
         "in_game_only": true,
         "native_window": true,
-        "use_os_windowing":true,
+        
         "show_in_taskbar":true,
-        "start_position":{"top":100,"left":300},
-        "block_top_window_navigation":true,
-        "popup_blocker":true,
-        "mute":true,
-        "enable_top_isolation":true,
-        "allow_local_file_access":true,
+        "start_position":{"top":100,"left":0},
+        
+        
         "focus_game_takeover":"ReleaseOnHidden",
         "focus_game_takeover_release_hotkey":"sample_app_ts_showhide",
         "resizable": true,
-        "transparent": true,
-        "override_on_update": true,
+        "transparent": false,
+        
         "size": {
-          "width": 1212,
-          "height": 699
+          "width": 100,
+          "height": 500
         },
         "min_size": {
-          "width": 1212,
-          "height": 699
+          "width": 100,
+          "height": 500
         }
-      }
+      },
+
+      "menu": {
+        "file": "menu.html",
+        "in_game_only": true,
+        "native_window": true,
+        "show_in_taskbar":true,
+        "start_position":{"top":100,"left":100},
+        
+        
+        "focus_game_takeover":"ReleaseOnHidden",
+        "focus_game_takeover_release_hotkey":"alert_the_XY",
+        "resizable": true,
+        "transparent": false,
+        
+        "size": {
+          "width": 900,
+          "height": 900
+        },
+        "min_size": {
+          "width": 1400,
+          "height": 900
+        }
+      },
     },
     "game_targeting": {
       "type": "dedicated",
       "game_ids": [
-        227001
+        22700
       ]
     },
     "game_events": [
-      227001
+      22700
     ],
     "launch_events": [
       {
         "event": "GameLaunch",
         "event_data": {
           "game_ids": [
-            227001
+            22700
           ]
         },
         "start_minimized": false

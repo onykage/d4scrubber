@@ -20,10 +20,13 @@ class BackgroundController {
   private _windows: Record<string, OWWindow> = {};
   private _gameListener: OWGameListener;
 
+  private static snappedimg = '';
+
   private constructor() {
     // Populating the background controller's window dictionary
     this._windows[kWindowNames.desktop] = new OWWindow(kWindowNames.desktop);
     this._windows[kWindowNames.inGame] = new OWWindow(kWindowNames.inGame);
+    this._windows[kWindowNames.menu] = new OWWindow(kWindowNames.menu);
 
     // When a a supported game game is started or is ended, toggle the app's windows
     this._gameListener = new OWGameListener({
@@ -45,6 +48,7 @@ class BackgroundController {
     return BackgroundController._instance;
   }
 
+
   // When running the app, start listening to games' status and decide which window should
   // be launched first, based on whether a supported game is currently running
   public async run() {
@@ -55,8 +59,31 @@ class BackgroundController {
       : kWindowNames.desktop;
 
     this._windows[currWindowName].restore();
-  }
+    overwolf.windows.minimize('menu', console.log)
+    overwolf.windows.onMessageReceived.addListener(function (message) {
+      //if (await this.isSupportedGameRunning()) {
+        overwolf.windows.restore('menu', console.log);
+        BackgroundController.snappedimg = message.content;
+        console.log(BackgroundController.snappedimg);
 
+      //}
+        overwolf.windows.sendMessage('menu', '1', message.content, function (response) {
+          // Handle response if needed
+          console.log("message seen by background."+ message.content);
+          
+        });
+      });
+  }
+ // newHotkey = {
+ //   name: <name-of hotkey>,
+ //   gameid: <only use if applicable>,
+ //   virtualKey: 75,
+ //   modifiers: {
+ //     ctrl: true //shift
+ //   }
+ // };
+ // overwolf.settings.hotkeys.assign(newHotkey, console.log)
+  
   private async onAppLaunchTriggered(e: AppLaunchTriggeredEvent) {
     console.log('onAppLaunchTriggered():', e);
 
@@ -67,10 +94,16 @@ class BackgroundController {
     if (await this.isSupportedGameRunning()) {
       this._windows[kWindowNames.desktop].close();
       this._windows[kWindowNames.inGame].restore();
+      this._windows[kWindowNames.menu].restore();
+      
+      //
     } else {
       this._windows[kWindowNames.desktop].restore();
       this._windows[kWindowNames.inGame].close();
+      this._windows[kWindowNames.menu].close();
     }
+
+
   }
 
   private toggleWindows(info: RunningGameInfo) {
@@ -81,9 +114,11 @@ class BackgroundController {
     if (info.isRunning) {
       this._windows[kWindowNames.desktop].close();
       this._windows[kWindowNames.inGame].restore();
+      this._windows[kWindowNames.menu].restore();
     } else {
       this._windows[kWindowNames.desktop].restore();
       this._windows[kWindowNames.inGame].close();
+      this._windows[kWindowNames.menu].close();
     }
   }
 

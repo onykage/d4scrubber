@@ -27,7 +27,9 @@ class InGame extends AppWindow {
     this._infoLog = document.getElementById('infoLog');
 
     this.setToggleHotkeyBehavior();
-    this.setToggleHotkeyText();
+    //this.setToggleHotkeyText();
+    //this.setToggleMenuBehavior();
+    //this.setCoorsHotkeyBehavior();
   }
 
   public static instance() {
@@ -104,10 +106,66 @@ class InGame extends AppWindow {
         this.currWindow.restore();
       }
     }
-
     OWHotkeys.onHotkeyDown(kHotkeys.toggle, toggleInGameWindow);
   }
 
+  //const formData = new FormData();
+  //formData.append('file', file);
+
+
+
+  // alert the xy on hotkey Ctrl+K hotkey
+  private async setCoorsHotkeyBehavior() {
+    const alertthexy = async (
+    //  mouseResult: overwolf.settings.hotkeys.OnPressedEvent
+    ): Promise<void> => {
+      //do something here.
+      //document.addEventListener("click", function(event) {
+      //  alert("clientX: " + event.clientX + " - clientY: " + event.clientY);
+      //});
+      //var settings = {"roundAwayFromZero" : true, "crop": {x:964,y:96, width:916, height:858}, "rescale" :{width:850, height:850}};
+      //overwolf.media.getScreenshotUrl(settings, function(info){
+      //overwolf.media.takeScreenshot(function(info) {
+      //  if (typeof info.url === 'undefined') {
+      //    console.error(info);
+       //   return;
+      //  }
+      //  const gameimage = info.url;
+     //   overwolf.windows.sendMessage('menu', '1', {data:gameimage}, ()=>{console.log('Message sent to window "secondWindow"')})
+        //overwolf.windows.sendMessage("menu", {data:gameimage});
+        //fetch('http://tf.raum.au/', {
+        //  method: 'POST',
+         // body: info.url
+        //})
+        //.then(response => response.json())
+        //.then(data => {
+        //  console.log('File uploaded successfully:', data);
+        //})
+        //.catch(error => {
+        //  console.error('Error uploading file:', error);
+        //});
+
+    //    window.addEventListener("message", message => {
+    //      if (message.origin !== "https://yourdomain.gg") {
+    //      return;
+   //       }
+//
+    //      let data = message.data;
+    //      if (!data) {
+   //       return;
+   //       }
+
+   //       // do something interesting with the data
+//      });
+        //document.getElementById("eventsLog").innerHTML = "<img src='"+info.url+"' width='500'/>"; 
+        //console.log(overwolf.games.launchers.getRunningLaunchersInfo());
+
+        
+    //});
+    //console.log(overwolf.games.launchers.getRunningLaunchersInfo(function(errors){}));
+    }
+    OWHotkeys.onHotkeyDown(kHotkeys.alertxy, alertthexy);
+  }
   // Appends a new line to the specified log
   private logLine(log: HTMLElement, data, highlight) {
     const line = document.createElement('pre');

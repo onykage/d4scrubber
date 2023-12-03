@@ -6,88 +6,18 @@
   <link rel="stylesheet" href="../../css/header.css" />
   <link rel="stylesheet" href="../../css/ingame.css" />
   <link rel="stylesheet" href="../../css/modal.css" />
-  <title>Overwolf Sample App - In-Game page</title>
-<script defer src="js/in_game.js"></script>
-<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-<script type="text/javascript">
-  //document.addEventListener("click", function(event) {
-  //  alert("clientX: " + event.clientX + " - clientY: " + event.clientY);
-  //});
-  document.addEventListener('keydown', function(event) {
-    // Check for Ctrl+Shift+F
-    if (event.ctrlKey && event.shiftKey && event.key === 'F') {
-        // Your action here
-        alert('Hotkey Ctrl+Shift+F was pressed!');
-    }
-  });
-  //document.addEventListener('click', function(event) {
-  //    const screenshotTarget = document.body;
-  //    html2canvas(screenshotTarget).then(canvas => {
-        // to image as png use below line
-          // const base64image = canvas.toDataURL("image/png");
-        // show the image in window use below line
-          // window.location.href = base64image;
-        
-        // screenshot appended to the body as canvas
-  //        document.getElementById('eventsLog').appendChild(canvas);  
-          //dataURL = canvas.toDataURL();  
-          // to print the screenshot in console use below line
-          // console.log(dataURL);
-          
-          // following line is optional and it is to save the screenshot
-          // on the server side. It initiates an ajax call
-          //pushScreenshotToServer(dataURL); 
-  //    });  
-  //});
-  function loadDoc() {
-    //const xhttp = new XMLHttpRequest();
-    //xhttp.onload = function() {
-    //  const jsonData = this.responseText;
-    //  document.getElementById("eventsLog").innerHTML = jsonData;
-    //  const jsonObject = JSON.parse(jsonData);
-    //  document.getElementById("eventsLog").innerHTML = jsonObject.listings.titleTokens;
-    //}
-    //xhttp.open("GET", "http://www.thedouglasgroup.net/files/message.txt");
-    //xhttp.send();
-
-    fetch('http://www.thedouglasgroup.net/files/message.txt')
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        document.getElementById("eventsLog").innerHTML = "<img src='https://thecrimsonmarket.net/mana/image/"+data['listings'][0]['images'][0]+"' />";
-        //document.getElementById("eventsLog").innerHTML = "<img src='https://thecrimsonmarket.com/mana/image/651853ed6523bbbc9d0da455' />";
-      })
-      .catch(error => { 
-        console.error('Error:', error);
-    });
-
-    var settings = {"crop": {x:299,y:194, width:82, height:82}, "rescale" :{width:42, height:42}};
-    overwolf.media.takeScreenshot(function(info) {
-      if (typeof info.url === 'undefined') {
-        console.error(info);
-        return;
-      }
-
-      document.getElementById("eventsLog").innerHTML = "<img src='"+info.url+"' />";  
-      
-    });
-    console.log(overwolf.games.launchers.getRunningLaunchersInfo(function(errors){}));
-  }
-</script>
-</head>
-<body class="in-game" onload="loadDoc();">
+  <title>Menu</title>
+  <style>
+  </style>
+<script defer src="js/in_game.js"></script></head>
+<body class="in-game">
   <!-- -------------------------------- Header ------------------------------- -->
 
   <header id="header" class="app-header">
     <img src="../../img/header_icon.svg" />
-    <h1>Events App / Diablo 4</h1>
     <h1 class="hotkey-text">
       Show/Hide Hotkey:
       <kbd id="hotkey"></kbd>
-    </h1>
-    <h1 id="injected">
-      Injected:
-      <kbd id="fort"></kbd>
     </h1>
     <div class="window-controls-group">
       <button id="minimizeButton" class="window-control window-control-minimize" />
@@ -101,7 +31,7 @@
     <div id="logs">
       <div id="events" class="logColumn">
         <h1>Game Events</h1>
-        <div id="eventsLog" class="dataText">
+        <div id="eventsLog" class="dataText" style="overflow: scroll; width: 350px;">
         </div>
       </div>
       <div id="infoUpdates" class="logColumn">
@@ -120,7 +50,7 @@
       </p>
     </div>
   </main>
-  
+  <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <script>
     // Standard Google Universal Analytics code
     (function (i, s, o, g, r, a, m) {
@@ -140,8 +70,62 @@
     ga('send', 'pageview', '/in_game.html');
   </script>
   <script type="text/javascript">
-  
+    //document.addEventListener("click", function(event) {
+    //  alert("clientX: " + event.clientX + " - clientY: " + event.clientY);
+    //});
+    document.addEventListener('keydown', function(event) {
+      // Check for Ctrl+Shift+F
+      if (event.ctrlKey && event.shiftKey && event.key === 'F') {
+        // Your action here
+        //alert('Hotkey Ctrl+Shift+F was pressed!');
+        //uncomment to use html2canvas
+        
+        //overwolf
+        //var settings = {"crop": {x:299,y:194, width:82, height:82}, "rescale" :{width:42, height:42}};
+        var gameimage = '';
+        overwolf.media.takeScreenshot(function(info) {
+          if (typeof info.url === 'undefined') {
+            console.error(info);
+            return;
+          }
+          //gameimage = info.url;
+          document.getElementById("eventsLog").innerHTML = "<img src='"+info.url+"' />"; 
 
+          overwolf.windows.sendMessage('background', '1', info.url, ()=>{console.log('Message sent to window "secondWindow"')})
+          console.log("sending Data:" + info.url);
+          
+        });
+
+
+        //const screenshotTarget = document.body;
+        //html2canvas(screenshotTarget).then(canvas => {
+          // to image as png use below line
+          //const base64image = canvas.toDataURL("image/png");
+          // show the image in window use below line
+          //window.location.href = base64image;
+          
+          // screenshot appended to the body as canvas
+          //document.getElementById('eventsLog').appendChild(canvas);  
+          //dataURL = canvas.toDataURL();  
+          //to print the screenshot in console use below line
+         // console.log(base64image);
+          /*
+          overwolf.media.takeScreenshot(function(info) {
+            if (typeof info.url === 'undefined') {
+              console.error(info);
+              return;
+            }
+            */
+            
+            //overwolf.windows.sendMessage("menu", {data:gameimage});
+            
+            //document.getElementById("eventsLog").innerHTML = "<img src='"+gameimage+"' width='500'/>";
+            // following line is optional and it is to save the screenshot
+            // on the server side. It initiates an ajax call
+            //pushScreenshotToServer(dataURL); 
+          //});
+      }
+    });
   </script>
 </body>
 </html>
