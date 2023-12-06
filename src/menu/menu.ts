@@ -27,8 +27,8 @@ class InGame extends AppWindow {
     this._infoLog = document.getElementById('infoLog');
 
     //this.setToggleHotkeyBehavior();
-    this.setToggleHotkeyText();
-    this.setToggleMenuBehavior();
+    //this.setToggleHotkeyText();
+    //this.setToggleMenuBehavior();
     //this.setCoorsHotkeyBehavior();
   }
 
@@ -143,6 +143,7 @@ class InGame extends AppWindow {
   }
   */
 
+  
   // Appends a new line to the specified log
   private logLine(log: HTMLElement, data, highlight) {
     const line = document.createElement('pre');
@@ -162,6 +163,7 @@ class InGame extends AppWindow {
       log.scrollTop = log.scrollHeight;
     }
   }
+  
 
   private async getCurrentGameClassId(): Promise<number | null> {
     const info = await OWGames.getRunningGameInfo();

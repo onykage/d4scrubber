@@ -32,8 +32,9 @@
       },
       "alert_the_XY": {
         "title": "ALERT its the CORDS",
-        "action-type": "toggle",
-        "default": "Ctrl+K"
+        "action-type": "custom",
+        "default": "Ctrl+K",
+        "game_ids": [22700]
       },
       "show_YourAppName": { 
           "title": "Show Player",
@@ -93,7 +94,7 @@
         "file": "in_game.html",
         "in_game_only": true,
         "native_window": true,
-        
+        "dev_tools_window_style": true,
         "show_in_taskbar":true,
         "start_position":{"top":100,"left":0},
         
@@ -101,15 +102,15 @@
         "focus_game_takeover":"ReleaseOnHidden",
         "focus_game_takeover_release_hotkey":"sample_app_ts_showhide",
         "resizable": true,
-        "transparent": false,
+        "transparent": true,
         
         "size": {
-          "width": 100,
-          "height": 500
+          "width": 75,
+          "height": 75
         },
         "min_size": {
-          "width": 100,
-          "height": 500
+          "width": 75,
+          "height": 75
         }
       },
 

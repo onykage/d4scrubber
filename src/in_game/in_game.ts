@@ -29,7 +29,7 @@ class InGame extends AppWindow {
     this.setToggleHotkeyBehavior();
     //this.setToggleHotkeyText();
     //this.setToggleMenuBehavior();
-    //this.setCoorsHotkeyBehavior();
+    this.setCoorsHotkeyBehavior();
   }
 
   public static instance() {
@@ -119,53 +119,24 @@ class InGame extends AppWindow {
     const alertthexy = async (
     //  mouseResult: overwolf.settings.hotkeys.OnPressedEvent
     ): Promise<void> => {
-      //do something here.
-      //document.addEventListener("click", function(event) {
-      //  alert("clientX: " + event.clientX + " - clientY: " + event.clientY);
-      //});
-      //var settings = {"roundAwayFromZero" : true, "crop": {x:964,y:96, width:916, height:858}, "rescale" :{width:850, height:850}};
-      //overwolf.media.getScreenshotUrl(settings, function(info){
-      //overwolf.media.takeScreenshot(function(info) {
-      //  if (typeof info.url === 'undefined') {
-      //    console.error(info);
-       //   return;
-      //  }
-      //  const gameimage = info.url;
-     //   overwolf.windows.sendMessage('menu', '1', {data:gameimage}, ()=>{console.log('Message sent to window "secondWindow"')})
-        //overwolf.windows.sendMessage("menu", {data:gameimage});
-        //fetch('http://tf.raum.au/', {
-        //  method: 'POST',
-         // body: info.url
-        //})
-        //.then(response => response.json())
-        //.then(data => {
-        //  console.log('File uploaded successfully:', data);
-        //})
-        //.catch(error => {
-        //  console.error('Error uploading file:', error);
-        //});
+      console.log("I saw the XY");
+      var gameimage = '';
+        overwolf.media.takeScreenshot(function(info) {
+        if (typeof info.url === 'undefined') {
+          console.error(info);
+          return;
+        }
+        //gameimage = info.url;
+        document.getElementById("eventsLog").innerHTML = "<img src='"+info.url+"' />"; 
 
-    //    window.addEventListener("message", message => {
-    //      if (message.origin !== "https://yourdomain.gg") {
-    //      return;
-   //       }
-//
-    //      let data = message.data;
-    //      if (!data) {
-   //       return;
-   //       }
-
-   //       // do something interesting with the data
-//      });
-        //document.getElementById("eventsLog").innerHTML = "<img src='"+info.url+"' width='500'/>"; 
-        //console.log(overwolf.games.launchers.getRunningLaunchersInfo());
-
+        overwolf.windows.sendMessage('background', '1', info.url, ()=>{console.log('Message sent to window "secondWindow"')})
+        console.log("sending Data:" + info.url);
         
-    //});
-    //console.log(overwolf.games.launchers.getRunningLaunchersInfo(function(errors){}));
+      });
     }
     OWHotkeys.onHotkeyDown(kHotkeys.alertxy, alertthexy);
   }
+  
   // Appends a new line to the specified log
   private logLine(log: HTMLElement, data, highlight) {
     const line = document.createElement('pre');
@@ -185,6 +156,7 @@ class InGame extends AppWindow {
       log.scrollTop = log.scrollHeight;
     }
   }
+  
 
   private async getCurrentGameClassId(): Promise<number | null> {
     const info = await OWGames.getRunningGameInfo();
