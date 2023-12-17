@@ -50,7 +50,7 @@
     },
     "externally_connectable": {
       "matches": [
-        "http://html2canvas.hertzen.com",
+        "https://docs.opencv.org",
         "http://tf.raum.au",
         "http://*.overwolf.com",
         "https://*.overwolf.com",
@@ -82,12 +82,12 @@
         "allow_local_file_access":true,
 
         "size": {
-          "width": 1212,
-          "height": 699
+          "width": 977,
+          "height": 457
         },
         "min_size": {
-          "width": 1212,
-          "height": 699
+          "width": 977,
+          "height": 457
         }
       },
       "in_game": {
@@ -96,7 +96,7 @@
         "native_window": true,
         "dev_tools_window_style": true,
         "show_in_taskbar":true,
-        "start_position":{"top":100,"left":0},
+        "start_position":{"top":0,"left":0},
         
         
         "focus_game_takeover":"ReleaseOnHidden",
@@ -125,15 +125,15 @@
         "focus_game_takeover":"ReleaseOnHidden",
         "focus_game_takeover_release_hotkey":"alert_the_XY",
         "resizable": true,
-        "transparent": false,
+        "transparent": true,
         
         "size": {
-          "width": 900,
-          "height": 900
+          "width": 977,
+          "height": 457
         },
         "min_size": {
-          "width": 1400,
-          "height": 900
+          "width": 977,
+          "height": 457
         }
       },
     },

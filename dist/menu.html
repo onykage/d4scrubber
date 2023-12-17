@@ -1,19 +1,30 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="stylesheet" href="../../css/general.css" />
-  <link rel="stylesheet" href="../../css/header.css" />
-  <link rel="stylesheet" href="../../css/ingame.css" />
-  <link rel="stylesheet" href="../../css/modal.css" />
-  <title>CM Helper</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Crimson Market</title>
+  <style>
+    button {
+      width: 75px;
+      margin-bottom: 5px;
+    }
+    #img { 
+     display: none;
+    }
+    #c1 { 
+    }
+    #c2 {
+      border: 1px solid blue;
+    }
+  </style>
 <script defer src="js/menu.js"></script></head>
-<body class="in-game">
+<body bgcolor="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="selectBox();">
   <!-- -------------------------------- Header ------------------------------- -->
 
-  <header id="header" class="app-header">
-    <img src="../../img/header_icon.svg" />
-    <h1>CM Helper / in-game window</h1>
+  <header id="header" class="app-header" style="display: none;">
+    <img src="../../img/cm_logo.png" width="24"/>
+    <h1>CM Shop Editor</h1>
     <h1 class="hotkey-text">
       Show/Hide Hotkey:
       <kbd id="hotkey"></kbd>
@@ -26,28 +37,176 @@
   </header>
 
   <!-- --------------------------------- Main -------------------------------- -->
-  <main>
-    <div id="logs">
-      <div id="events" class="logColumn">
-        <h1>Game Events</h1>
-        <div id="screenshot" class="dataText">
-        </div>
+  <main style="display: none;">
+    <!--div style="width: 100%;">
+      <button>File</button><button>Crop</button><button id="login" style="float: right; margin-right: 35px;">Login</button>
+      <canvas id='c1' height='430px' width='900px'></canvas>
+      <div id="screenshot">
+         <img id='img' src='img/images/spacer.gif' width='900'/> 
       </div>
-      <div id="infoUpdates" class="logColumn">
-        <h1>Info Updates</h1>
-        <div id="infoLog" class="dataText"></div>
-      </div>
-    </div>
-    <div id="other">
-      <h1>Real-time Game Data</h1>
-      <p id="infoParagraph">
-        The background controller of this app is listening to all the game
-        events and info updates, and sends them to this window, that prints
-        them to the screen. Some specific events (Match Start/End, Kill and
-        Death) are painted in <span style="color: #00DEFA">teal</span> and
-        logged to the developers console.
-      </p>
-    </div>
+    </div-->
   </main>
+  <table id="Table_01" width="977" height="457" border="0" cellpadding="0" cellspacing="0" style="background: #000000; display: inline;">
+  <tr>
+    <td rowspan="4">
+      <img src="img/images/Untitled-1_01.png" width="32" height="40" alt=""></td>
+    <td rowspan="2">
+      <img src="img/images/Untitled-1_02.png" width="11" height="29" alt=""></td>
+    <td colspan="2" rowspan="2">
+      <img src="img/images/Untitled-1_03.png" width="889" height="29" alt=""></td>
+    <td rowspan="4">
+      <img src="img/images/Untitled-1_04.png" width="11" height="40" alt=""></td>
+    <td>
+      <img src="img/images/Untitled-1_05.png" width="24" height="8" alt=""></td>
+    <td>
+      <img src="img/images/Untitled-1_06.png" width="9" height="8" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="1" height="8" alt=""></td>
+  </tr>
+  <tr>
+    <td rowspan="2">
+      <img src="img/images/Toggle_view.png" width="24" height="25" alt="" title="Close Window?" id="minimizeButton" class="window-control window-control-minimize"></td>
+    <td rowspan="2">
+      <img src="img/images/Untitled-1_08.png" width="9" height="25" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="1" height="21" alt=""></td>
+  </tr>
+  <tr>
+    <td colspan="2" rowspan="3">
+      <img src="img/images/icon_pointer.png" onmouseover="this.src='img/images/icon_pointer_selected.png'" onmouseout="this.src='img/images/icon_pointer.png'" width="37" height="36" alt=""></td>
+    <td width="863" height="385" rowspan="10" bgcolor="#000000" style="">
+      <canvas id='c1' height='385' width='863' style="position: absolute; top: 40px; left: 70px;"></canvas>
+      <div id="screenshot">
+         <img id='img' src='' width='770'/> 
+      </div>
+    </td>
+    <td>
+      <img src="img/images/spacer.gif" width="1" height="4" alt=""></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="img/images/Untitled-1_11.png" width="33" height="7" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="1" height="7" alt=""></td>
+  </tr>
+  <tr>
+    <td rowspan="8">
+      <img src="img/images/Untitled-1_12.png" width="32" height="374" alt=""></td>
+    <td colspan="3" rowspan="8">
+      <img src="img/images/Untitled-1_13.png" width="44" height="374" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="1" height="25" alt=""></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="img/images/icon_select.png" onmouseover="this.src='img/images/icon_select_selected.png'" onmouseout="this.src='img/images/icon_select.png'" width="37" height="36" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="1" height="36" alt=""></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="img/images/Untitled-1_15.png" width="37" height="37" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="1" height="37" alt=""></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="img/images/Untitled-1_16.png" width="37" height="36" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="1" height="36" alt=""></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="img/images/Untitled-1_17.png" width="37" height="35" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="1" height="35" alt=""></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="img/images/Untitled-1_18.png" width="37" height="37" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="1" height="37" alt=""></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="img/images/Untitled-1_19.png" width="37" height="35" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="1" height="35" alt=""></td>
+  </tr>
+  <tr>
+    <td width="37" height="133" colspan="2">
+      <img src="img/images/spacer.gif" width="37" height="133" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="1" height="133" alt=""></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="img/images/Untitled-1_21.png" width="43" height="42" alt=""></td>
+    <td colspan="2">
+      <img src="img/images/Untitled-1_22.png" width="889" height="42" alt=""></td>
+    <td colspan="3">
+      <img src="img/images/Untitled-1_23.png" width="44" height="42" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="1" height="42" alt=""></td>
+  </tr>
+  <tr>
+    <td>
+      <img src="img/images/spacer.gif" width="32" height="1" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="11" height="1" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="26" height="1" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="863" height="1" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="11" height="1" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="24" height="1" alt=""></td>
+    <td>
+      <img src="img/images/spacer.gif" width="9" height="1" alt=""></td>
+    <td></td>
+  </tr>
+</table>
 </body>
+<script type="text/javascript">
+  //credit.. found script on jsfiddle: https://jsfiddle.net/uhtdv0mj/3/
+  //
+  //document.addEventListener('click', function(event) {
+  function selectBox(){
+    console.log("selectbox function running");
+    const c1 = document.getElementById("c1");
+    const ctx1 = c1.getContext("2d");
+
+    const drawImage = () => {
+      ctx1.drawImage(document.getElementById("img"), 0, 0, 863, 385);
+    }
+
+    const drawSelection = (e) => {
+      ctx1.strokeStyle = "#ff0000";
+      ctx1.beginPath();
+      ctx1.rect(origin.x, origin.y, e.offsetX - origin.x, e.offsetY - origin.y); 
+      ctx1.stroke();
+    };
+
+    const clear = () => {
+      ctx1.strokeStyle = "#fff";
+      ctx1.clearRect(0, 0, c1.width, c1.height);
+    };
+
+    const render = (e) => {
+      clear();
+      drawImage();
+        
+      if (origin) drawSelection(e);
+    }
+
+    window.onload = drawImage;
+
+    let origin = null;
+    c1.onmousedown = e => { origin = {x: e.offsetX, y: e.offsetY}; };
+    c1.onmouseup = e => { origin = null; render(e); };
+    c1.onmousemove = render;
+  };
+
+</script>
 </html>

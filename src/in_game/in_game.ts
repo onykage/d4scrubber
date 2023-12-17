@@ -59,7 +59,7 @@ class InGame extends AppWindow {
   }
 
   private onInfoUpdates(info) {
-    this.logLine(this._infoLog, info, false);
+    //this.logLine(this._infoLog, info, false);
   }
 
   // Special events will be highlighted in the event log
@@ -79,7 +79,7 @@ class InGame extends AppWindow {
 
       return false
     });
-    this.logLine(this._eventsLog, e, shouldHighlight);
+    //this.logLine(this._eventsLog, e, shouldHighlight);
   }
 
   // Displays the toggle minimize/restore hotkey in the window header
@@ -127,7 +127,7 @@ class InGame extends AppWindow {
           return;
         }
         //gameimage = info.url;
-        document.getElementById("eventsLog").innerHTML = "<img src='"+info.url+"' />"; 
+        //document.getElementById("eventsLog").innerHTML = "<img src='"+info.url+"' />"; 
 
         overwolf.windows.sendMessage('background', '1', info.url, ()=>{console.log('Message sent to window "secondWindow"')})
         console.log("sending Data:" + info.url);
@@ -138,24 +138,7 @@ class InGame extends AppWindow {
   }
   
   // Appends a new line to the specified log
-  private logLine(log: HTMLElement, data, highlight) {
-    const line = document.createElement('pre');
-    line.textContent = JSON.stringify(data);
-
-    if (highlight) {
-      line.className = 'highlight';
-    }
-
-    // Check if scroll is near bottom
-    const shouldAutoScroll =
-      log.scrollTop + log.offsetHeight >= log.scrollHeight - 10;
-
-    log.appendChild(line);
-
-    if (shouldAutoScroll) {
-      log.scrollTop = log.scrollHeight;
-    }
-  }
+  
   
 
   private async getCurrentGameClassId(): Promise<number | null> {

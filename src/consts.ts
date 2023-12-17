@@ -18,7 +18,7 @@ export const kWindowNames = {
   desktop: 'desktop',
   menu: 'menu'
 };
-
+//this is the reason the windows do not toggle correctly.  There isnt a toggle for both windows.
 export const kHotkeys = {
   toggle: 'sample_app_ts_showhide',
   alertxy: 'alert_the_XY',

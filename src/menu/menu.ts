@@ -14,27 +14,27 @@ import WindowState = overwolf.windows.WindowStateEx;
 // and writes them to the relevant log using <pre> tags.
 // The window also sets up Ctrl+F as the minimize/restore hotkey.
 // Like the background window, it also implements the Singleton design pattern.
-class InGame extends AppWindow {
-  private static _instance: InGame;
-  private _gameEventsListener: OWGamesEvents;
-  private _eventsLog: HTMLElement;
-  private _infoLog: HTMLElement;
+class Menu extends AppWindow {
+  private static _instance: Menu;
+  //private _gameEventsListener: OWGamesEvents;
+  //private _eventsLog: HTMLElement;
+  //private _infoLog: HTMLElement;
 
   private constructor() {
-    super(kWindowNames.inGame);
+    super(kWindowNames.menu);
 
-    this._eventsLog = document.getElementById('eventsLog');
-    this._infoLog = document.getElementById('infoLog');
+    //this._eventsLog = document.getElementById('eventsLog');
+    //this._infoLog = document.getElementById('infoLog');
 
     //this.setToggleHotkeyBehavior();
-    //this.setToggleHotkeyText();
-    //this.setToggleMenuBehavior();
+    this.setToggleHotkeyText();
+    this.setToggleMenuBehavior();
     //this.setCoorsHotkeyBehavior();
   }
 
   public static instance() {
     if (!this._instance) {
-      this._instance = new InGame();
+      this._instance = new Menu();
     }
 
     return this._instance;
@@ -42,6 +42,7 @@ class InGame extends AppWindow {
 
   public async run() {
     const gameClassId = await this.getCurrentGameClassId();
+    /*
 
     const gameFeatures = kGamesFeatures.get(gameClassId);
 
@@ -56,6 +57,7 @@ class InGame extends AppWindow {
 
       this._gameEventsListener.start();
     }
+    */
     var dataArray = '';
     overwolf.windows.onMessageReceived.addListener(function (message) {
     //overwolf.windows.onMessageReceived.addListener((message) =>
@@ -64,39 +66,39 @@ class InGame extends AppWindow {
     //    {
           console.log('Message received', message.content)
           dataArray = message.content;
-          document.getElementById("screenshot").innerHTML = "<img src='"+dataArray+"' width='500'/>";
+          document.getElementById("screenshot").innerHTML = "<img id='img' src='"+message.content+"' width='863'/>";
     //    }
     });
   }
 
-  private onInfoUpdates(info) {
-    this.logLine(this._infoLog, info, false);
-
-    
-    
-    
-  }
+  //private onInfoUpdates(info) {
+  //  this.logLine(this._infoLog, info, false);
+//
+  //  
+  //  
+  //  
+  //}
 
   // Special events will be highlighted in the event log
   
-  private onNewEvents(e) {
-    const shouldHighlight = e.events.some(event => {
-      switch (event.name) {
-        case 'kill':
-        case 'death':
-        case 'assist':
-        case 'level':
-        case 'matchStart':
-        case 'match_start':
-        case 'matchEnd':
-        case 'match_end':
-          return true;
-      }
-
-      return false
-    });
-    this.logLine(this._eventsLog, e, shouldHighlight);
-  }
+  //private onNewEvents(e) {
+  //  const shouldHighlight = e.events.some(event => {
+  //    switch (event.name) {
+  //      case 'kill':
+  //      case 'death':
+  //      case 'assist':
+  //      case 'level':
+  //      case 'matchStart':
+  //      case 'match_start':
+  //      case 'matchEnd':
+  //      case 'match_end':
+  //        return true;
+  //    }
+//
+  //    return false
+  //  });
+  //  this.logLine(this._eventsLog, e, shouldHighlight);
+  //}
   
 
 
@@ -108,19 +110,19 @@ class InGame extends AppWindow {
     hotkeyElem.textContent = hotkeyText;
   }
 
-  // Sets toggleInGameWindow as the behavior for the Ctrl+G hotkey
+  // Sets toggleMenuWindow as the behavior for the Ctrl+G hotkey
   private async setToggleMenuBehavior() {
     const toggleMenuWindow = async (
       hotkeyResults: overwolf.settings.hotkeys.OnPressedEvent
     ): Promise<void> => {
       console.log(`pressed hotkey for ${hotkeyResults.name}`);
-      const inGameState = await this.getWindowState();
+      const MenuState = await this.getWindowState();
 
-      if (inGameState.window_state === WindowState.NORMAL ||
-        inGameState.window_state === WindowState.MAXIMIZED) {
+      if (MenuState.window_state === WindowState.NORMAL ||
+        MenuState.window_state === WindowState.MAXIMIZED) {
         this.currWindow.minimize();
-      } else if (inGameState.window_state === WindowState.MINIMIZED ||
-        inGameState.window_state === WindowState.CLOSED) {
+      } else if (MenuState.window_state === WindowState.MINIMIZED ||
+        MenuState.window_state === WindowState.CLOSED) {
         this.currWindow.restore();
       }
     }
@@ -145,6 +147,7 @@ class InGame extends AppWindow {
 
   
   // Appends a new line to the specified log
+  /*
   private logLine(log: HTMLElement, data, highlight) {
     const line = document.createElement('pre');
     line.textContent = JSON.stringify(data);
@@ -163,8 +166,7 @@ class InGame extends AppWindow {
       log.scrollTop = log.scrollHeight;
     }
   }
-  
-
+  */
   private async getCurrentGameClassId(): Promise<number | null> {
     const info = await OWGames.getRunningGameInfo();
 
@@ -172,4 +174,4 @@ class InGame extends AppWindow {
   }
 }
 
-InGame.instance().run();
+Menu.instance().run();
