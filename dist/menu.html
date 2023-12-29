@@ -15,7 +15,6 @@
     #c1 { 
     }
     #c2 {
-      border: 1px solid blue;
     }
   </style>
 <script defer src="js/menu.js"></script></head>
@@ -73,11 +72,11 @@
   </tr>
   <tr>
     <td colspan="2" rowspan="3">
-      <img src="img/images/icon_pointer.png" onmouseover="this.src='img/images/icon_pointer_selected.png'" onmouseout="this.src='img/images/icon_pointer.png'" width="37" height="36" alt=""></td>
+      <img id="selectTool" src="img/images/icon_pointer.png" onmouseover="this.src='img/images/icon_pointer_selected.png'" onmouseout="this.src='img/images/icon_pointer.png'" width="37" height="36" alt=""></td>
     <td width="863" height="385" rowspan="10" bgcolor="#000000" style="">
-      <canvas id='c1' height='385' width='863' style="position: absolute; top: 40px; left: 70px;"></canvas>
-      <div id="screenshot">
-         <img id='img' src='' width='770'/> 
+      <canvas id='c1' height='385' width='863' style="position: absolute; top: 40px; left: 80px;"></canvas>
+      <div id="screenshot" style="padding-left: 5px;">
+         <img id='img' src='' height='1080' width='1980'style="position: absolute; top: 40px; left: 80px;" /> 
       </div>
     </td>
     <td>
@@ -172,21 +171,48 @@
   //credit.. found script on jsfiddle: https://jsfiddle.net/uhtdv0mj/3/
   //
   //document.addEventListener('click', function(event) {
+
   function selectBox(){
     console.log("selectbox function running");
     const c1 = document.getElementById("c1");
     const ctx1 = c1.getContext("2d");
+    const img1 = document.getElementById("img");
+    var wrx = 0;
+    var wry = 0;
+    var ory = 0;
+    var orx = 0;
+    const selBut = document.getElementById("selectTool");
 
     const drawImage = () => {
-      ctx1.drawImage(document.getElementById("img"), 0, 0, 863, 385);
+      ctx1.width = img1.width * 0.25;
+      ctx1.height = img1.height * 0.25;
+      ctx1.drawImage(document.getElementById("img"), 0, 0, ctx1.width, ctx1.height);
+      //render();
     }
 
     const drawSelection = (e) => {
       ctx1.strokeStyle = "#ff0000";
       ctx1.beginPath();
       ctx1.rect(origin.x, origin.y, e.offsetX - origin.x, e.offsetY - origin.y); 
+      wrx = e.offsetX - origin.x;
+      wry = e.offsetY - origin.y;
       ctx1.stroke();
     };
+
+    const crop_image = (orx, ory, wrx, wry) => {
+      clear();
+     // var image = new Image();
+     // image.src = document.getElementById('img');
+    var xar = wrx - orx;
+    var yar = wry - ory;
+    var startX = orx*4;
+    var startY = ory*4;
+    var C_width = xar*4;
+    var C_height = yar*4;
+      console.log("x:"+orx+",y:"+ory+",x1:"+xar+",y1:"+yar);
+      //console.log("image_x:"+document.getElementById("img").width);
+      ctx1.drawImage(document.getElementById("img"), startX-30, startY, C_width, C_height, 0, 0, xar*1.5, yar*1.5);
+    }
 
     const clear = () => {
       ctx1.strokeStyle = "#fff";
@@ -203,9 +229,10 @@
     window.onload = drawImage;
 
     let origin = null;
-    c1.onmousedown = e => { origin = {x: e.offsetX, y: e.offsetY}; };
-    c1.onmouseup = e => { origin = null; render(e); };
+    c1.onmousedown = e => { origin = {x: e.offsetX, y: e.offsetY}; orx = e.offsetX; ory = e.offsetY;};
+    c1.onmouseup = e => { origin = null; crop_image(orx, ory, e.offsetX, e.offsetY); };
     c1.onmousemove = render;
+    selBut.onmousedown = render;
   };
 
 </script>
