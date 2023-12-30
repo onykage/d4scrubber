@@ -181,6 +181,7 @@
     var wry = 0;
     var ory = 0;
     var orx = 0;
+    var drawit = true;
     const selBut = document.getElementById("selectTool");
 
     const drawImage = () => {
@@ -220,8 +221,10 @@
     };
 
     const render = (e) => {
-      clear();
-      drawImage();
+      if(drawit){
+        clear();
+        drawImage();
+      }
         
       if (origin) drawSelection(e);
     }
@@ -230,9 +233,9 @@
 
     let origin = null;
     c1.onmousedown = e => { origin = {x: e.offsetX, y: e.offsetY}; orx = e.offsetX; ory = e.offsetY;};
-    c1.onmouseup = e => { origin = null; crop_image(orx, ory, e.offsetX, e.offsetY); };
+    c1.onmouseup = e => { origin = null; crop_image(orx, ory, e.offsetX, e.offsetY); drawit = false; };
     c1.onmousemove = render;
-    selBut.onmousedown = render;
+    selBut.onmousedown = e => { render; drawit = true;};
   };
 
 </script>
